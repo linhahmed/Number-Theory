@@ -79,6 +79,32 @@ public class imp {
 		return res % prodM;
 
 	}
+	public static int mulCRT(long x, long y, int[] mods) {
+		long[] remsX = new long[mods.length];
+		long[] remsY = new long[mods.length];
+		long[] remsR = new long[mods.length];
+		int prodM = 1;
+		int subProd;
+		int res = 0;
+		for (int i = 0; i < mods.length; i++) {
+			remsX[i] = fastModExpI(x, 1, mods[i]);
+			remsY[i] = fastModExpI(y, 1, mods[i]);
+			remsR[i] = (remsX[i] * remsY[i]) % mods[i];
+			prodM = prodM * mods[i];
+		}
+		for (int i = 0; i < mods.length; i++) {
+			subProd = prodM / mods[i];
+			int[] a = gcd(subProd, mods[i]);
+
+			if (a[1] < 0) {
+				a[1] += mods[i];
+			}
+			res += (subProd * a[1] * remsR[i]) % prodM;
+		}
+		System.out.println(res % prodM);
+		return res % prodM;
+
+	}
 
 	public static String[] isPrime(int n) {
 		Instant start = Instant.now();
@@ -116,13 +142,13 @@ public class imp {
 
 	public static void main(String[] args) {
 		// int[] f=gcd(98*97*95,65);
-		// int[] f = { 99, 98, 97, 95 };
+		 int[] f = { 99, 98, 97, 95 };
 
 		// addCRT(1234,1021,f);
 		// System.out.println(f[1]);
-		// int[] f=gcd(99*98*97,95);
+		 //int[] f=gcd(99*98*97,95);
 		// System.out.println(f[1]);
-		// addCRT(12368467, 41345678, f);
-		System.out.println(naive2(23, 3, 6));
+		mulCRT(1237, 136, f);
+		//System.out.println(naive2(23, 3, 6));
 	}
 }
