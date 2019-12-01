@@ -106,27 +106,28 @@ public class imp {
 
 	}
 
-	public static String[] isPrime(int n) {
-		Instant start = Instant.now();
-		String[] op;
-		if (n <= 1) {
-			Instant finish = Instant.now();
-			long timeElapsed = Duration.between(start, finish).toMillis();
-			op = new String[] { "false", Long.toString(timeElapsed) };
-			return op;
-		}
-		for (int i = 2; i < Math.sqrt(n); i++) {
-			if (n % i == 0) {
-				Instant finish = Instant.now();
-				long timeElapsed = Duration.between(start, finish).toMillis();
-				op = new String[] { "false", Long.toString(timeElapsed) };
-				return op;
+	public static void Primes(int n) {
+		long startTime = System.currentTimeMillis();
+		boolean prime[] = new boolean[n + 1];
+		ArrayList<String> op = new ArrayList<String>();
+		for (int i = 0; i < n; i++)
+			prime[i] = true;
+
+		for (int i = 2; i * i <= n; i++) {
+			if (prime[i] == true) {
+				for (int j = i * 2; j <= n; j += i)
+					prime[j] = false;
 			}
 		}
-		Instant finish = Instant.now();
-		long timeElapsed = Duration.between(start, finish).toMillis();
-		op = new String[] { "true", Long.toString(timeElapsed) };
-		return op;
+
+		for (int i = 2; i <= n; i++) {
+			if (prime[i] == true)
+				System.out.print(i + " ");
+		}
+
+		long stopTime = System.currentTimeMillis();
+		long elapsedTime = stopTime - startTime;
+		System.out.println("\nExecution time is " + elapsedTime);
 	}
 
 	public static int[] gcd(int p, int q) {
