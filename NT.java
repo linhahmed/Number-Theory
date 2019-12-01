@@ -109,7 +109,6 @@ public class imp {
 	public static void Primes(int n) {
 		long startTime = System.currentTimeMillis();
 		boolean prime[] = new boolean[n + 1];
-		ArrayList<String> op = new ArrayList<String>();
 		for (int i = 0; i < n; i++)
 			prime[i] = true;
 
