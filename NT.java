@@ -2,24 +2,31 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class imp {
-	public static long naive1(long m, long n, long p) {
+	/**
+	 * calculate (a^b)% m using naive algorithm
+	 **/
+	public static long naive1(long a, long b, long m) {
 		long c = 1;
-		for (long i = 0; i < n; i++) {
-			c = c * m;
+		for (long i = 0; i < b; i++) {
+			c = c * a;
 		}
-		c = c % p;
+		c = c % m;
 		return c;
 	}
-
-	public static long naive2(long m, long n, long p) {
+	/**
+	 * calculate (a^b)% m using naive algorithm
+	 **/
+	public static long naive2(long a, long b, long m) {
 		long c = 1;
-		for (long i = 0; i < n; i++) {
-			c = (c * m) % p;
+		for (long i = 0; i < b; i++) {
+			c = (c * a) % m;
 		}
-		c = c % p;
+		c = c % m;
 		return c;
 	}
-
+	/**
+	 * calculate (a^b)% m using iterative Fast Exponentiation algorithm
+	 **/
 	public static long fastModExpI(long a, long b, long m) {
 		long res = 1;
 		while (b > 0) {
@@ -31,12 +38,13 @@ public class imp {
 			b = b >> 1;
 
 		}
-		// System.out.println(res);
 		return res;
 
 	}
 
-	static int ans = 1;
+	/**
+	 * calculate (a^b)% m using recursive Fast Exponentiation algorithm
+	 **/
 
 	public static int fastModExpR(int a, int b, int m) {
 
@@ -52,7 +60,10 @@ public class imp {
 		}
 
 	}
-
+	/**
+	 * calculate (x+y)% M using Chinese Remainder Theorem
+	 * in domain Zm1 ∗Zm2 ∗. . . .  Zmn.
+	 **/
 	public static int addCRT(long x, long y, int[] mods) {
 		long[] remsX = new long[mods.length];
 		long[] remsY = new long[mods.length];
@@ -75,10 +86,37 @@ public class imp {
 			}
 			res += (subProd * a[1] * remsR[i]) % prodM;
 		}
-		System.out.println(res % prodM);
 		return res % prodM;
 
 	}
+	/**
+	 * calculate (x+y) in ZM domain
+	 **/
+	public static long addCRTInM(long x, long y, int[] mods) {
+		long prodM = 1;
+
+		for (int i = 0; i < mods.length; i++) {
+			prodM = prodM * mods[i];
+		}
+		return (x+y)%prodM;
+
+	}
+	/**
+	 * calculate (x*y) in ZM domain
+	 **/
+	public static long mulCRTInM(long x, long y, int[] mods) {
+		long prodM = 1;
+
+		for (int i = 0; i < mods.length; i++) {
+			prodM = prodM * mods[i];
+		}
+		return (x*y)%prodM;
+
+	}
+	/**
+	 * calculate (x*y) using Chinese Remainder Theorem
+	 *  in domain Zm1 ∗Zm2 ∗. . . .  Zmn.
+	 **/
 	public static int mulCRT(long x, long y, int[] mods) {
 		long[] remsX = new long[mods.length];
 		long[] remsY = new long[mods.length];
@@ -101,10 +139,10 @@ public class imp {
 			}
 			res += (subProd * a[1] * remsR[i]) % prodM;
 		}
-		System.out.println(res % prodM);
 		return res % prodM;
 
 	}
+
 
 	public static void Primes(int n) {
 		long startTime = System.currentTimeMillis();
