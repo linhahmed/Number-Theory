@@ -67,8 +67,8 @@ public class NT {
 	}
 
 	/**
-	 * calculate (x+y)% M using Chinese Remainder Theorem in domain Zm1 ∗Zm2 ∗. . .
-	 * . Zmn.
+	 * calculate (x+y) using Chinese Remainder Theorem 
+	 * in domain Zm1 Zm2 . . . . .  Zmn.
 	 **/
 	public static int addCRT(long x, long y, int[] mods) {
 		long[] remsX = new long[mods.length];
@@ -109,9 +109,10 @@ public class NT {
 
 	}
 
+
 	/**
-	 * calculate (x*y) using Chinese Remainder Theorem in domain Zm1 ∗Zm2 ∗. . . .
-	 * Zmn.
+	 * calculate (x*y) using Chinese Remainder Theorem 
+	 * in domain Zm1 Zm2 . . . . .  Zmn.
 	 **/
 	public static int mulCRT(long x, long y, int[] mods) {
 		long[] remsX = new long[mods.length];
