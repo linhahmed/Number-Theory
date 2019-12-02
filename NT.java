@@ -4,7 +4,7 @@ import java.time.Instant;
 public class imp {
 	public static long naive1(long m, long n, long p) {
 		long c = 1;
-		for (int i = 0; i < n; i++) {
+		for (long i = 0; i < n; i++) {
 			c = c * m;
 		}
 		c = c % p;
@@ -13,7 +13,7 @@ public class imp {
 
 	public static long naive2(long m, long n, long p) {
 		long c = 1;
-		for (int i = 0; i < n; i++) {
+		for (long i = 0; i < n; i++) {
 			c = (c * m) % p;
 		}
 		c = c % p;
