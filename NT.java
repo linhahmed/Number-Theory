@@ -1,7 +1,10 @@
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
-public class imp {
+public class NT {
 	/**
 	 * calculate (a^b)% m using naive algorithm
 	 **/
@@ -13,6 +16,7 @@ public class imp {
 		c = c % m;
 		return c;
 	}
+
 	/**
 	 * calculate (a^b)% m using naive algorithm
 	 **/
@@ -24,6 +28,7 @@ public class imp {
 		c = c % m;
 		return c;
 	}
+
 	/**
 	 * calculate (a^b)% m using iterative Fast Exponentiation algorithm
 	 **/
@@ -60,9 +65,10 @@ public class imp {
 		}
 
 	}
+
 	/**
-	 * calculate (x+y)% M using Chinese Remainder Theorem
-	 * in domain Zm1 ∗Zm2 ∗. . . .  Zmn.
+	 * calculate (x+y)% M using Chinese Remainder Theorem in domain Zm1 ∗Zm2 ∗. . .
+	 * . Zmn.
 	 **/
 	public static int addCRT(long x, long y, int[] mods) {
 		long[] remsX = new long[mods.length];
@@ -89,6 +95,7 @@ public class imp {
 		return res % prodM;
 
 	}
+
 	/**
 	 * calculate (x+y) in ZM domain
 	 **/
@@ -98,24 +105,13 @@ public class imp {
 		for (int i = 0; i < mods.length; i++) {
 			prodM = prodM * mods[i];
 		}
-		return (x+y)%prodM;
+		return (x + y) % prodM;
 
 	}
-	/**
-	 * calculate (x*y) in ZM domain
-	 **/
-	public static long mulCRTInM(long x, long y, int[] mods) {
-		long prodM = 1;
 
-		for (int i = 0; i < mods.length; i++) {
-			prodM = prodM * mods[i];
-		}
-		return (x*y)%prodM;
-
-	}
 	/**
-	 * calculate (x*y) using Chinese Remainder Theorem
-	 *  in domain Zm1 ∗Zm2 ∗. . . .  Zmn.
+	 * calculate (x*y) using Chinese Remainder Theorem in domain Zm1 ∗Zm2 ∗. . . .
+	 * Zmn.
 	 **/
 	public static int mulCRT(long x, long y, int[] mods) {
 		long[] remsX = new long[mods.length];
@@ -143,30 +139,22 @@ public class imp {
 
 	}
 
+	/**
+	 * calculate (x*y) in ZM domain
+	 **/
+	public static long mulCRTInM(long x, long y, int[] mods) {
+		long prodM = 1;
 
-	public static void Primes(int n) {
-		long startTime = System.currentTimeMillis();
-		boolean prime[] = new boolean[n + 1];
-		for (int i = 0; i < n; i++)
-			prime[i] = true;
-
-		for (int i = 2; i * i <= n; i++) {
-			if (prime[i] == true) {
-				for (int j = i * 2; j <= n; j += i)
-					prime[j] = false;
-			}
+		for (int i = 0; i < mods.length; i++) {
+			prodM = prodM * mods[i];
 		}
+		return (x * y) % prodM;
 
-		for (int i = 2; i <= n; i++) {
-			if (prime[i] == true)
-				System.out.print(i + " ");
-		}
-
-		long stopTime = System.currentTimeMillis();
-		long elapsedTime = stopTime - startTime;
-		System.out.println("\nExecution time is " + elapsedTime);
 	}
 
+	/**
+	 * return array {d, a, b} such that d = gcd(p, q), ap + bq = d
+	 **/
 	public static int[] gcd(int p, int q) {
 		if (q == 0)
 			return new int[] { p, 1, 0 };
@@ -178,15 +166,35 @@ public class imp {
 		return new int[] { d, a, b };
 	}
 
-	public static void main(String[] args) {
-		// int[] f=gcd(98*97*95,65);
-		 int[] f = { 99, 98, 97, 95 };
+	/**
+	 * This function calculates prime numbers below n
+	 */
+	public static void Primes(int n) {
+		long startTime = System.currentTimeMillis();
+		// Create a boolean array "prime[0..n]" and initialize all of it as true.
+		boolean prime[] = new boolean[n + 1];
+		for (int i = 0; i < n; i++)
+			prime[i] = true;
 
-		// addCRT(1234,1021,f);
-		// System.out.println(f[1]);
-		 //int[] f=gcd(99*98*97,95);
-		// System.out.println(f[1]);
-		mulCRT(1237, 136, f);
-		//System.out.println(naive2(23, 3, 6));
+		// A value in prime[i] will be false if i isn't prime, else true.
+		for (int i = 2; i * i <= n; i++) {
+			if (prime[i] == true) {
+				for (int j = i * 2; j <= n; j += i)
+					prime[j] = false;
+			}
+		}
+
+		System.out.print("\nThe prime numbers below " + n + " :\n");
+		for (int i = 2; i <= n; i++) {
+			if (prime[i] == true) {
+				System.out.print(i + " ");
+			}
+		}
+
+		long stopTime = System.currentTimeMillis();
+		long elapsedTime = stopTime - startTime;
+		System.out.println("\nExecution time is " + elapsedTime);
 	}
+
+	
 }
