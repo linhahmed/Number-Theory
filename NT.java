@@ -78,8 +78,8 @@ public class NT {
 		int subProd;
 		int res = 0;
 		for (int i = 0; i < mods.length; i++) {
-			remsX[i] = fastModExpI(x, 1, mods[i]);
-			remsY[i] = fastModExpI(y, 1, mods[i]);
+			remsX[i] =x% mods[i];
+			remsY[i] = y% mods[i];
 			remsR[i] = (remsX[i] + remsY[i]) % mods[i];
 			prodM = prodM * mods[i];
 		}
@@ -122,8 +122,8 @@ public class NT {
 		int subProd;
 		int res = 0;
 		for (int i = 0; i < mods.length; i++) {
-			remsX[i] = fastModExpI(x, 1, mods[i]);
-			remsY[i] = fastModExpI(y, 1, mods[i]);
+			remsX[i] =x% mods[i];
+			remsY[i] = y% mods[i];
 			remsR[i] = (remsX[i] * remsY[i]) % mods[i];
 			prodM = prodM * mods[i];
 		}
